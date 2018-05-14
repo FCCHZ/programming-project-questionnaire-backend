@@ -6,7 +6,7 @@ import {
   Entity,
   ManyToOne,
 } from 'typeorm';
-import { Option } from '../option/option.entity';
+import { Question } from '../question/question.entity';
 
 @Entity('answer')
 export class Answer {
@@ -14,8 +14,8 @@ export class Answer {
 
   @Column() answer: string;
 
-  @ManyToOne(type => Option, option => option.answers)
-  option: Option;
+  @ManyToOne(type => Question, question => question.answers)
+  question: Question;
 
   @CreateDateColumn() created_at: string;
   @UpdateDateColumn() updated_at: string;

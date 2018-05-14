@@ -8,7 +8,6 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Question } from '../question/question.entity';
-import { Answer } from '../answer/answer.entity';
 
 @Entity('option')
 export class Option {
@@ -23,11 +22,6 @@ export class Option {
 
   @ManyToOne(type => Question, question => question.options)
   question: Question;
-
-  @OneToMany(type => Answer, answer => answer.option, {
-    cascade: ['remove'],
-  })
-  answers: Answer[];
 
   @CreateDateColumn() created_at: string;
   @UpdateDateColumn() updated_at: string;

@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { Questionnaire } from '../questionnaire/questionnaire.entity';
 import { Option } from '../option/option.entity';
+import { Answer } from '../answer/answer.entity';
 
 @Entity('question')
 export class Question {
@@ -30,6 +31,14 @@ export class Question {
     cascade: ['remove'],
   })
   options: Option[];
+
+  @OneToMany(type => Answer, answer => answer.question, {
+    eager: true,
+    cascade: ['remove'],
+  })
+  answers: Answer[];
+
+  @Column() order: number;
 
   @CreateDateColumn() created_at: string;
   @UpdateDateColumn() updated_at: string;
