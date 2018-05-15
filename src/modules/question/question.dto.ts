@@ -3,4 +3,5 @@ export class QuestionDto {
   title: string;
   type: number;
   questionnaireId: number;
+  options: string;
 }

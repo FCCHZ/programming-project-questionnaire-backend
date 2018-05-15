@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, getManager } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Answer } from './answer.entity';
 
@@ -20,25 +20,16 @@ export class AnswerService {
       .getMany();
   }
 
-  /**
-   * 根据id查询问题详情
-   * @param id
-   */
-  async findById(id: number): Promise<Answer> {
-    return await this.repository.findOneOrFail(id);
-  }
-
-  async save(Answer: Answer): Promise<Answer> {
-    return await this.repository.save(Answer);
-  }
-
-  async update(id: number, newAnswer: Answer): Promise<Answer> {
-    await this.repository.update(id, newAnswer);
-    return this.findById(id);
-  }
-
-  async remove(id: number): Promise<number> {
-    await this.repository.delete(id);
-    return id;
+  async save(answers: Answer[]): Promise<boolean> {
+    return await getManager().transaction(async transactionalEntityManager => {
+      if (answers.length > 0) {
+        await Promise.all(
+          answers.map(async answer => {
+            await transactionalEntityManager.save(answer);
+          }),
+        );
+      }
+      return true;
+    });
   }
 }
