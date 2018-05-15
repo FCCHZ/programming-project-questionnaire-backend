@@ -8,5 +8,6 @@ import { QuestionnaireService } from './questionnaire.service';
   imports: [TypeOrmModule.forFeature([Questionnaire])],
   controllers: [QuestionnaireController],
   providers: [QuestionnaireService],
+  exports: [QuestionnaireService],
 })
 export class QuestionnaireModule {}
