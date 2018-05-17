@@ -28,13 +28,15 @@ export class Question {
 
   @OneToMany(type => Option, option => option.question, {
     eager: true,
-    cascade: ['remove'],
+    cascade: true,
+    onDelete: 'CASCADE',
   })
   options: Option[];
 
   @OneToMany(type => Answer, answer => answer.question, {
     eager: true,
-    cascade: ['remove'],
+    cascade: true,
+    onDelete: 'CASCADE',
   })
   answers: Answer[];
 

@@ -10,5 +10,6 @@ import { Option } from '../option/option.entity';
   imports: [TypeOrmModule.forFeature([Question, Option]), QuestionnaireModule],
   controllers: [QuestionController],
   providers: [QuestionService],
+  exports: [QuestionService],
 })
 export class QuestionModule {}

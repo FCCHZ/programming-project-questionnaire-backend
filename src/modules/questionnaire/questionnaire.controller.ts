@@ -10,7 +10,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { QuestionnaireService } from './questionnaire.service';
-import httpResult from 'utils/httpResult';
+import httpResult from '../../utils/httpResult';
 import { QuestionnaireDto } from './questionnaire.dto';
 import { Questionnaire } from './questionnaire.entity';
 

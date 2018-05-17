@@ -3,7 +3,7 @@ import { OptionService } from './option.service';
 import { OptionDto } from './option.dto';
 import { Option } from './option.entity';
 import { QuestionService } from '../question/question.service';
-import httpResult from 'utils/httpResult';
+import httpResult from '../../utils/httpResult';
 
 @Controller('option')
 export class OptionController {

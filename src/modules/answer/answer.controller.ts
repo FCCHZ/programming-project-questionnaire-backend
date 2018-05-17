@@ -3,7 +3,7 @@ import { AnswerService } from './answer.service';
 import { AnswerDto } from './answer.dto';
 import { Answer } from './answer.entity';
 import { QuestionService } from '../question/question.service';
-import httpResult from 'utils/httpResult';
+import httpResult from '../../utils/httpResult';
 
 @Controller('answer')
 export class AnswerController {
