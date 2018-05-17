@@ -20,7 +20,10 @@ export class Option {
   })
   value: string;
 
-  @ManyToOne(type => Question, question => question.options)
+  @ManyToOne(type => Question, question => question.options, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
   question: Question;
 
   @CreateDateColumn() created_at: string;

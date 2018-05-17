@@ -1,5 +1,5 @@
 export class AnswerDto {
-  id: number;
+  id: string;
   answer: string;
-  questionId: number;
+  questionId: string;
 }

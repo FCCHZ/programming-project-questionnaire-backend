@@ -18,13 +18,13 @@ import { Questionnaire } from './questionnaire.entity';
 export class QuestionnaireController {
   constructor(private readonly service: QuestionnaireService) {}
 
-  @Get('/pagination')
+  @Get()
   async fetchSurveyWithPaginatin(@Query() query, @Res() res) {
     const { page, pageSize } = query;
     const result = await this.service.pagination(page, pageSize);
     return httpResult(res, true, '问卷列表数据返回成功', {
-      page,
-      pageSize,
+      page: +page,
+      pageSize: +pageSize,
       list: result[0],
       total: result[1],
     });
@@ -36,7 +36,7 @@ export class QuestionnaireController {
     questionnaire.title = questionnaireDto.title;
     questionnaire.content = questionnaireDto.content;
     questionnaire.deadline = questionnaireDto.deadline;
-    questionnaire.status = questionnaireDto.status;
+    questionnaire.status = +questionnaireDto.status;
 
     const result = await this.service.save(questionnaire);
     return httpResult(res, true, '问卷保存成功', result);
@@ -59,7 +59,7 @@ export class QuestionnaireController {
     questionnaire.title = questionnaireDto.title;
     questionnaire.content = questionnaireDto.content;
     questionnaire.deadline = questionnaireDto.deadline;
-    questionnaire.status = questionnaireDto.status;
+    questionnaire.status = +questionnaireDto.status;
 
     const result = await this.service.update(id, questionnaire);
     return httpResult(res, true, '问卷修改成功', result);
@@ -67,8 +67,7 @@ export class QuestionnaireController {
 
   @Delete(':id')
   async remove(@Param() params, @Res() res) {
-    const id = params.id;
-    await this.service.remove(id);
+    const id = await this.service.remove(params.id);
     return httpResult(res, true, '问卷删除成功', id);
   }
 }

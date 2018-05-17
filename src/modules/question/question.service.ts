@@ -30,7 +30,7 @@ export class QuestionService {
    * @param id
    */
   async findById(id: number): Promise<Question> {
-    return await this.repository.findOneOrFail(id);
+    return await this.repository.findOneOrFail();
   }
 
   /**
@@ -45,6 +45,7 @@ export class QuestionService {
       if (options.length > 0) {
         await Promise.all(
           options.map(async option => {
+            option.question = result;
             await transactionalEntityManager.save(option);
           }),
         );
@@ -66,7 +67,10 @@ export class QuestionService {
   ): Promise<Question> {
     return await getManager().transaction(async transactionalEntityManager => {
       await transactionalEntityManager.update(Question, id, newQuestion);
-      const existedQuestion = await this.findById(id);
+      const existedQuestion = await transactionalEntityManager.findOneOrFail(
+        Question,
+        id,
+      );
 
       if (options.length > 0) {
         // 找出这个问题下所有的选项，并删除
@@ -78,6 +82,7 @@ export class QuestionService {
         );
         await Promise.all(
           options.map(async option => {
+            option.question = existedQuestion;
             await transactionalEntityManager.save(option);
           }),
         );

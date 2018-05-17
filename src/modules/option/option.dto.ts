@@ -1,6 +1,6 @@
 export class OptionDto {
-  id: number;
+  id: string;
   title: string;
   value: string;
-  questionId: number;
+  questionId: string;
 }

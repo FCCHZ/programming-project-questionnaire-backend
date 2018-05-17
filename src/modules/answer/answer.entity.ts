@@ -14,7 +14,10 @@ export class Answer {
 
   @Column() answer: string;
 
-  @ManyToOne(type => Question, question => question.answers)
+  @ManyToOne(type => Question, question => question.answers, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
   question: Question;
 
   @CreateDateColumn() created_at: string;

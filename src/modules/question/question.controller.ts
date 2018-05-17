@@ -38,16 +38,19 @@ export class QuestionController {
 
   @Post()
   async save(@Body() questionDto: QuestionDto, @Res() res) {
-    const surveyId = questionDto.questionnaireId;
-    const options: OptionDto[] = JSON.parse(questionDto.options);
+    if (!questionDto.options && questionDto.type !== '3') {
+      return httpResult(res, false, '您还没有创建问题下的选项', null);
+    }
     const questionnaire = await this.surveyService.findById(
-      questionDto.questionnaireId,
+      +questionDto.questionnaireId,
     );
     const question = new Question();
     question.title = questionDto.title;
-    question.type = questionDto.type;
+    question.type = +questionDto.type;
     question.questionnaire = questionnaire;
 
+    const options: OptionDto[] =
+      questionDto.type !== '3' ? JSON.parse(questionDto.options) : [];
     const optionArry = options.map(item => {
       const option = new Option();
       option.title = item.title;
@@ -59,11 +62,15 @@ export class QuestionController {
     return httpResult(res, true, '问题保存成功', question);
   }
 
-  @Put('id')
+  @Put(':id')
   async modify(@Param() params, @Body() questionDto: QuestionDto, @Res() res) {
+    if (!questionDto.options && questionDto.type !== '3') {
+      return httpResult(res, false, '您还没有创建问题下的选项', null);
+    }
+
     const newQuestion = new Question();
     newQuestion.title = questionDto.title;
-    newQuestion.type = questionDto.type;
+    newQuestion.type = +questionDto.type;
 
     const options: OptionDto[] = JSON.parse(questionDto.options);
     const optionArry = options.map(item => {

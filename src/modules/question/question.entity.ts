@@ -23,20 +23,19 @@ export class Question {
   })
   type: number;
 
-  @ManyToOne(type => Questionnaire, questionnaire => questionnaire.questions)
+  @ManyToOne(type => Questionnaire, questionnaire => questionnaire.questions, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
   questionnaire: Questionnaire;
 
   @OneToMany(type => Option, option => option.question, {
     eager: true,
-    cascade: true,
-    onDelete: 'CASCADE',
   })
   options: Option[];
 
   @OneToMany(type => Answer, answer => answer.question, {
     eager: true,
-    cascade: true,
-    onDelete: 'CASCADE',
   })
   answers: Answer[];
 

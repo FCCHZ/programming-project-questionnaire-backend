@@ -14,7 +14,7 @@ export class OptionController {
 
   @Put(':id')
   async modify(@Param() params, @Body() optionDto: OptionDto, @Res() res) {
-    const question = await this.questionService.findById(optionDto.questionId);
+    const question = await this.questionService.findById(+optionDto.questionId);
     const option = new Option();
     option.title = optionDto.title;
     option.value = optionDto.value;

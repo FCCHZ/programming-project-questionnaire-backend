@@ -32,7 +32,9 @@ export class QuestionnaireService {
    * @param id
    */
   async findById(id: number): Promise<Questionnaire> {
-    return await this.repository.findOneOrFail(id);
+    return await this.repository.findOneOrFail(id, {
+      relations: ['questions'],
+    });
   }
 
   /**

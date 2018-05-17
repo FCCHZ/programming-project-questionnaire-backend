@@ -13,13 +13,13 @@ export class AnswerController {
   ) {}
 
   @Post()
-  async saveAnswers(@Body() answerDtos: string, @Res() res) {
-    const answerDtoArry: AnswerDto[] = JSON.parse(answerDtos);
+  async saveAnswers(@Body() body, @Res() res) {
+    const answerDtoArry: AnswerDto[] = JSON.parse(body.answers);
     const answers = await Promise.all(
       answerDtoArry.map(async item => {
         const answer = new Answer();
         answer.answer = item.answer;
-        const question = await this.questionService.findById(item.questionId);
+        const question = await this.questionService.findById(+item.questionId);
         answer.question = question;
         return answer;
       }),

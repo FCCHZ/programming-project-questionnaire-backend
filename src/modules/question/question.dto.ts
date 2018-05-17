@@ -1,7 +1,7 @@
 export class QuestionDto {
-  id: number;
+  id: string;
   title: string;
-  type: number;
-  questionnaireId: number;
+  type: string;
+  questionnaireId: string;
   options: string;
 }

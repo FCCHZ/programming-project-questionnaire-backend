@@ -33,10 +33,7 @@ export class Questionnaire {
   })
   status: number;
 
-  @OneToMany(type => Question, question => question.questionnaire, {
-    eager: true,
-    cascade: ['remove'],
-  })
+  @OneToMany(type => Question, question => question.questionnaire)
   questions: Question[];
 
   @CreateDateColumn() created_at: string;

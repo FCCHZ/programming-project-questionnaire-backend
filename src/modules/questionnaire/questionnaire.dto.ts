@@ -1,7 +1,7 @@
 export class QuestionnaireDto {
-  id: number;
+  id: string;
   title: string;
   content: string;
   deadline: string;
-  status: number;
+  status: string;
 }
