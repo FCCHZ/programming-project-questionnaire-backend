@@ -33,6 +33,18 @@ export class Questionnaire {
   })
   status: number;
 
+  @Column({
+    type: 'timestamp',
+    comment: '发布时间',
+  })
+  onlineTime: string;
+
+  @Column({
+    type: 'timestamp',
+    comment: '下线时间',
+  })
+  offlineTime: string;
+
   @OneToMany(type => Question, question => question.questionnaire)
   questions: Question[];
 

@@ -36,7 +36,6 @@ export class QuestionnaireController {
     questionnaire.title = questionnaireDto.title;
     questionnaire.content = questionnaireDto.content;
     questionnaire.deadline = questionnaireDto.deadline;
-    questionnaire.status = +questionnaireDto.status;
 
     const result = await this.service.save(questionnaire);
     return httpResult(res, true, '问卷保存成功', result);
@@ -59,7 +58,6 @@ export class QuestionnaireController {
     questionnaire.title = questionnaireDto.title;
     questionnaire.content = questionnaireDto.content;
     questionnaire.deadline = questionnaireDto.deadline;
-    questionnaire.status = +questionnaireDto.status;
 
     const result = await this.service.update(id, questionnaire);
     return httpResult(res, true, '问卷修改成功', result);
@@ -69,5 +67,17 @@ export class QuestionnaireController {
   async remove(@Param() params, @Res() res) {
     const id = await this.service.remove(params.id);
     return httpResult(res, true, '问卷删除成功', id);
+  }
+
+  @Get('online/:id')
+  async online(@Param() params, @Res() res) {
+    const result = await this.service.online(params.id);
+    return httpResult(res, true, '新闻发布成功', result);
+  }
+
+  @Get('offline/:id')
+  async offline(@Param() params, @Res() res) {
+    const result = await this.service.offline(params.id);
+    return httpResult(res, true, '新闻下线成功', result);
   }
 }

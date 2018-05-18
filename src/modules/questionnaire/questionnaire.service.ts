@@ -63,4 +63,29 @@ export class QuestionnaireService {
     await this.repository.delete(id);
     return id;
   }
+
+  /**
+   * 发布
+   * @param id
+   */
+  async online(id: number): Promise<Questionnaire> {
+    await this.repository.update(id, {
+      status: 2,
+      onlineTime: new Date().toISOString(),
+      offlineTime: '1970',
+    });
+    return this.findById(id);
+  }
+
+  /**
+   * 下线
+   * @param id
+   */
+  async offline(id: number): Promise<Questionnaire> {
+    await this.repository.update(id, {
+      status: 3,
+      offlineTime: new Date().toISOString(),
+    });
+    return this.findById(id);
+  }
 }

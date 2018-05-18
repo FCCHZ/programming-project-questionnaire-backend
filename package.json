@@ -19,6 +19,7 @@
     "mysql": "^2.15.0",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.0.0",
+    "rxjs-compat": "^6.1.0",
     "typeorm": "^0.2.5",
     "typescript": "^2.6.2"
   },
