@@ -4,7 +4,9 @@ import { AnswerDto } from './answer.dto';
 import { Answer } from './answer.entity';
 import { QuestionService } from '../question/question.service';
 import httpResult from '../../utils/httpResult';
+import { ApiUseTags } from '@nestjs/swagger';
 
+@ApiUseTags('答案')
 @Controller('answer')
 export class AnswerController {
   constructor(
@@ -13,9 +15,9 @@ export class AnswerController {
   ) {}
 
   @Post()
-  async saveAnswers(@Body() body, @Res() res) {
-    const answerDtoArry: AnswerDto[] = JSON.parse(body.answers);
-    const answers = await Promise.all(
+  async saveAnswers(@Body() body: AnswerDto, @Res() res) {
+    const answerDtoArry: any[] = JSON.parse(body.answers);
+    const answerArry = await Promise.all(
       answerDtoArry.map(async item => {
         const answer = new Answer();
         answer.answer = item.answer;
@@ -24,7 +26,7 @@ export class AnswerController {
         return answer;
       }),
     );
-    const result = this.service.save(answers);
+    const result = this.service.save(answerArry);
     return httpResult(res, true, '答案提交成功', result);
   }
 }

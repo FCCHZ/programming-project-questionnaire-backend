@@ -16,7 +16,9 @@ import { Question } from './question.entity';
 import { QuestionnaireService } from '../questionnaire/questionnaire.service';
 import { Option } from '../option/option.entity';
 import { OptionDto } from '../option/option.dto';
+import { ApiUseTags, ApiImplicitParam } from '@nestjs/swagger';
 
+@ApiUseTags('问题')
 @Controller('question')
 export class QuestionController {
   constructor(
@@ -30,6 +32,7 @@ export class QuestionController {
     return httpResult(res, true, '问题返回成功', result);
   }
 
+  @ApiImplicitParam({ name: 'id' })
   @Get(':id')
   async findById(@Param() params, @Res() res) {
     const question = await this.service.findById(params.id);
@@ -62,6 +65,7 @@ export class QuestionController {
     return httpResult(res, true, '问题保存成功', question);
   }
 
+  @ApiImplicitParam({ name: 'id' })
   @Put(':id')
   async modify(@Param() params, @Body() questionDto: QuestionDto, @Res() res) {
     if (!questionDto.options && questionDto.type !== '3') {
@@ -88,6 +92,7 @@ export class QuestionController {
     return httpResult(res, true, '修改问题成功', result);
   }
 
+  @ApiImplicitParam({ name: 'id' })
   @Delete(':id')
   async remove(@Param() params, @Res() res) {
     const id = await this.service.remove(params.id);

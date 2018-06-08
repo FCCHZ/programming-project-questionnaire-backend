@@ -13,7 +13,9 @@ import { QuestionnaireService } from './questionnaire.service';
 import httpResult from '../../utils/httpResult';
 import { QuestionnaireDto } from './questionnaire.dto';
 import { Questionnaire } from './questionnaire.entity';
+import { ApiImplicitParam, ApiUseTags } from '@nestjs/swagger';
 
+@ApiUseTags('问卷')
 @Controller('survey')
 export class QuestionnaireController {
   constructor(private readonly service: QuestionnaireService) {}
@@ -41,12 +43,14 @@ export class QuestionnaireController {
     return httpResult(res, true, '问卷保存成功', result);
   }
 
+  @ApiImplicitParam({ name: 'id' })
   @Get(':id')
   async findById(@Param() params, @Res() res) {
     const questionnaire = await this.service.findById(params.id);
     return httpResult(res, true, '问卷查询成功', questionnaire);
   }
 
+  @ApiImplicitParam({ name: 'id' })
   @Put(':id')
   async modify(
     @Param() params,
@@ -63,18 +67,21 @@ export class QuestionnaireController {
     return httpResult(res, true, '问卷修改成功', result);
   }
 
+  @ApiImplicitParam({ name: 'id' })
   @Delete(':id')
   async remove(@Param() params, @Res() res) {
     const id = await this.service.remove(params.id);
     return httpResult(res, true, '问卷删除成功', id);
   }
 
+  @ApiImplicitParam({ name: 'id' })
   @Get('online/:id')
   async online(@Param() params, @Res() res) {
     const result = await this.service.online(params.id);
     return httpResult(res, true, '新闻发布成功', result);
   }
 
+  @ApiImplicitParam({ name: 'id' })
   @Get('offline/:id')
   async offline(@Param() params, @Res() res) {
     const result = await this.service.offline(params.id);

@@ -35,6 +35,13 @@
     iterare "0.0.8"
     optional "0.1.4"
 
+"@nestjs/swagger@^2.0.2":
+  version "2.0.2"
+  resolved "http://registry.npm.taobao.org/@nestjs/swagger/download/@nestjs/swagger-2.0.2.tgz#74aae53047031e1ba1317153c9cbf4ff306bdcc7"
+  dependencies:
+    lodash "^4.17.4"
+    swagger-ui-express "^3.0.8"
+
 "@nestjs/typeorm@^2.0.0":
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/@nestjs/typeorm/download/@nestjs/typeorm-2.0.0.tgz#71dee522091cd176474a6d86e0fe40dc3d1c1643"
@@ -4044,6 +4051,10 @@ supports-color@^5.2.0, supports-color@^5.3.0:
   resolved "http://registry.npm.taobao.org/supports-color/download/supports-color-5.4.0.tgz#1c6b337402c2137605efe19f10fec390f6faab54"
   dependencies:
     has-flag "^3.0.0"
+
+swagger-ui-express@^3.0.8:
+  version "3.0.9"
+  resolved "http://registry.npm.taobao.org/swagger-ui-express/download/swagger-ui-express-3.0.9.tgz#e92aac29db638c4317e2d872ef215f330a693f57"
 
 symbol-tree@^3.2.2:
   version "3.2.2"

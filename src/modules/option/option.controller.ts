@@ -4,7 +4,9 @@ import { OptionDto } from './option.dto';
 import { Option } from './option.entity';
 import { QuestionService } from '../question/question.service';
 import httpResult from '../../utils/httpResult';
+import { ApiUseTags, ApiImplicitParam } from '@nestjs/swagger';
 
+@ApiUseTags('问题选项')
 @Controller('option')
 export class OptionController {
   constructor(
@@ -12,6 +14,7 @@ export class OptionController {
     private readonly questionService: QuestionService,
   ) {}
 
+  @ApiImplicitParam({ name: 'id' })
   @Put(':id')
   async modify(@Param() params, @Body() optionDto: OptionDto, @Res() res) {
     const question = await this.questionService.findById(+optionDto.questionId);
@@ -24,6 +27,7 @@ export class OptionController {
     return httpResult(res, true, '修改选项成功', result);
   }
 
+  @ApiImplicitParam({ name: 'id' })
   @Delete(':id')
   async remove(@Param() params, @Res() res) {
     const id = await this.service.remove(params.id);
